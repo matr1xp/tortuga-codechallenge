@@ -1,3 +1,4 @@
+# Heroku commands for deployment
 heroku login
 heroku create
 git config --list | grep heroku
@@ -6,4 +7,5 @@ heroku run rake db:migrate
 heroku ps:scale web=1
 heroku ps
 heroku open
-heroku logs
+# heroku logs
+# heroku run rails console

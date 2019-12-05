@@ -1,21 +1,30 @@
 <h1>New Member</h1>
 
-<%-#= render 'form', member: @member -%>
-
-<%-#= link_to 'Back', members_path -%>
-
-
+<% if @member.errors.any? %>
+<p> Please correct the following errors before proceeding:</p>
+<ul>
+  <% @member.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
 
 <%= form_for @member do |form| %>
-  <%= label_tag(:name, "Name:") %>
-  <%= form.text_field :name %>
+  <%= label_tag(:name, "Name") %>
+  <%= form.text_field(:name, size: 50) %>
   
-  <%= label_tag(:heading, "Heading:") %>
-  <%= form.text_field :heading %>
+  <%= label_tag(:heading, "Heading") %>
+  <%= form.text_field(:heading, size: 50) %>
   
-  <%= label_tag(:website, "Website:") %>
-  <%= form.text_field :website %>
+  <%= label_tag(:website, "Website") %>
+  <%= form.text_field(:website, size: 50) %>
   
-  <br/><br/>
-  <%= submit_tag("Create") %>
+  <br/>
+  <br/>
+  
+  <%= submit_tag("Create", :class => "cmdButton") %>
 <% end %>
+
+<br/>
+<br/>
+<%= link_to image_tag("back.png", title: "Back", size: "20x20", align: "top"), members_path, :class => 'toolButton' %>

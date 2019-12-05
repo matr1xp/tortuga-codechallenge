@@ -27,15 +27,6 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
-    
-=begin
-    response = HTTP.post('https://www.shorturl.at/shortener.php', :form => {:u => member_params[:website]})
-    if response.status.success?
-      doc = Nokogiri::HTML(response.body.to_s)
-      short_url = doc.at('input#shortenurl')['value']
-      @member.short_url = "http://#{short_url}" 
-    end
-=end
     @member.short_url = ShorturlAt.shorten(member_params[:website])
 
     respond_to do |format|
@@ -50,8 +41,13 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1
   # PATCH/PUT /members/1.json
   def update
+    attributes = member_params.clone
+    if @member.website != attributes[:website]
+       attributes[:short_url] = ShorturlAt.shorten(member_params[:website])
+       puts "**** Website changed! Generating new SHORT URL ****"
+    end
     respond_to do |format|
-      if @member.update(member_params)
+      if @member.update(attributes)
         format.html { redirect_to @member, notice: 'Member was successfully updated.' }
       else
         format.html { render :edit }
@@ -64,7 +60,7 @@ class MembersController < ApplicationController
   def destroy
     @member.destroy
     respond_to do |format|
-      format.html { redirect_to members_url, notice: 'Member was successfully destroyed.' }
+      format.html { redirect_to members_url, notice: 'Member was successfully deleted.' }
     end
   end
 

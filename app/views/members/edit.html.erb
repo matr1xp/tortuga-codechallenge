@@ -1,6 +1,34 @@
 <h1>Editing Member</h1>
 
-<%= render 'form', member: @member %>
+<% if @member.errors.any? %>
+<p> Please correct the following errors before proceeding:</p>
+<ul>
+  <% @member.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
 
-<%= link_to 'Show', @member %> |
-<%= link_to 'Back', members_path %>
+<%= form_for @member do |form| %>
+  <%= label_tag(:name, "Name") %>
+  <%= form.text_field(:name, size: 50) %>
+
+  <%= label_tag(:website, "Website") %>
+  <%= form.text_field(:website, size: 50) %>
+  
+  <%= label_tag(:heading, "Heading") %>
+  <%= form.text_field(:heading, size: 50) %>
+   
+  <%= form.hidden_field(:short_url) %>
+  <br/>
+  <br/>
+  
+  <%= submit_tag("Update", :class=> "cmdButton") %>
+  <%= submit_tag("Reset", { :name => 'reset', :id => 'reset', :type => 'reset', :class => "cmdButton"}) %> 
+<% end %>
+
+<br/>
+<br/>
+
+<%= link_to image_tag("show.png", title: "Show", size: "20x20", align: "top"),  @member, :class => 'toolButton' %>
+<%= link_to image_tag("back.png", title: "Back", size: "20x20", align: "top"), members_path, :class => 'toolButton' %>

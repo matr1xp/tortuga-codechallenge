@@ -2,27 +2,35 @@
 
 <h1>Members</h1>
 
-<table>
+<table class="blueTable">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Heading</th>
-      <th>Website</th>
-      <th>Shortened URL</th>
-      <th colspan="3"></th>
+    <th>Name</th>
+    <th>Short URL</th>
+    <th>Friends</th>
+    <th></th>
     </tr>
   </thead>
-
+  <!--
+  <tfoot>
+  <tr>
+    <td colspan="4">
+    <div class="links"><a href="#">&laquo;</a> <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">&raquo;</a></div>
+    </td>
+  </tr>
+  </tfoot>
+  -->
   <tbody>
     <% @members.each do |member| %>
       <tr>
         <td><%= member.name %></td>
-        <td><%= member.heading %></td>
-        <td><%= member.website %></td>
         <td><%= link_to member.short_url, member.short_url, :target => "_blank" %></td>
-        <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td></td>
+        <td>
+          <%= link_to image_tag("show.png", title: "Show", size: "20x20", align: "top"), member, :class => 'toolButton'%>
+          <%= link_to image_tag("edit.png", title: "Edit", size: "20x20", align: "top"), edit_member_path(member), :class => 'toolButton' %>
+          <%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"), member, method: :delete, data: { confirm: "DELETE Member:\n#{member.name}\nAre you sure?" }, :class => 'toolButton' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Member', new_member_path %>
+<%= link_to 'Create new', new_member_path, :class=> "cmdButton" %>
