@@ -1,3 +1,5 @@
+require 'shorturl_at'
+
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
@@ -25,6 +27,17 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
+    
+=begin
+    response = HTTP.post('https://www.shorturl.at/shortener.php', :form => {:u => member_params[:website]})
+    if response.status.success?
+      doc = Nokogiri::HTML(response.body.to_s)
+      short_url = doc.at('input#shortenurl')['value']
+      @member.short_url = "http://#{short_url}" 
+    end
+=end
+    @member.short_url = ShorturlAt.shorten(member_params[:website])
+
     respond_to do |format|
       if @member.save
         format.html { redirect_to @member, notice: 'Member was successfully created.' }

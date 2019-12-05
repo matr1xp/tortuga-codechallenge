@@ -1,0 +1,9 @@
+heroku login
+heroku create
+git config --list | grep heroku
+git push heroku master
+heroku run rake db:migrate
+heroku ps:scale web=1
+heroku ps
+heroku open
+heroku logs
