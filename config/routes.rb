@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'members#index'
   get 'friendships/select/:id', to: 'friendships#select'
   resources :friendships
   resources :members
