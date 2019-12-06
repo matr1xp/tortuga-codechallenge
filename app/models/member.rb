@@ -1,4 +1,5 @@
 class Member < ApplicationRecord
+  attr_accessor :friend_count
   has_many :friendships
   has_many :friends, through: :friendships, dependent: :destroy
   validates :name, format: { with: /\A[^0-9`!@#\$%\^&*+_=]+\z/, message: "only allows letters" }, uniqueness: true

@@ -25,7 +25,7 @@
       <tr>
         <td><%= link_to member.name, "/members/#{member.id}" %></td>
         <td><%= link_to member.short_url, member.short_url, :target => "_blank" %></td>
-        <td></td>
+        <td><%= Member.find(member.id).friends.count %></td>
         <td style="display:none">
           <%= link_to image_tag("show.png", title: "Show", size: "20x20", align: "top"), member, :class => 'toolButton'%>
           <%= link_to image_tag("edit.png", title: "Edit", size: "20x20", align: "top"), edit_member_path(member), :class => 'toolButton' %>
