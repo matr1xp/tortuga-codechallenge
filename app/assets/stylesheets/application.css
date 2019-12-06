@@ -83,6 +83,15 @@ div {
 label {
   display: block;
 }
+table#Members {
+  width: 60%;
+}
+table#Friends {
+  width: 50%;
+}
+table#SelectFriends {
+  width: 30%;
+}
 table.blueTable {
   border: 1px solid #1C6EA4;
   background-color: #EEEEEE;

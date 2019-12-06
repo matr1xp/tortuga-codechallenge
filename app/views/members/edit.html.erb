@@ -31,4 +31,6 @@
 <br/>
 
 <%= link_to image_tag("show.png", title: "Show", size: "20x20", align: "top"),  @member, :class => 'toolButton' %>
+<%= link_to image_tag("friendship.png", title: "Add Friends", size: "20x20", align: "top"), '', :class => 'toolButton' %>
+<%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"), '', method: :delete, data: { confirm: "DELETE Member:\n#{@member.name}\nAre you sure?" }, :class => 'toolButton' %>
 <%= link_to image_tag("back.png", title: "Back", size: "20x20", align: "top"), members_path, :class => 'toolButton' %>

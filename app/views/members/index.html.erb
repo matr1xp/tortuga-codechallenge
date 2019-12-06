@@ -2,13 +2,13 @@
 
 <h1>Members</h1>
 
-<table class="blueTable">
+<table id="Members" class="blueTable">
   <thead>
     <tr>
     <th>Name</th>
     <th>Short URL</th>
     <th>Friends</th>
-    <th></th>
+    <th style="display:none"></th>
     </tr>
   </thead>
   <!--
@@ -23,12 +23,13 @@
   <tbody>
     <% @members.each do |member| %>
       <tr>
-        <td><%= member.name %></td>
+        <td><%= link_to member.name, "/members/#{member.id}" %></td>
         <td><%= link_to member.short_url, member.short_url, :target => "_blank" %></td>
         <td></td>
-        <td>
+        <td style="display:none">
           <%= link_to image_tag("show.png", title: "Show", size: "20x20", align: "top"), member, :class => 'toolButton'%>
           <%= link_to image_tag("edit.png", title: "Edit", size: "20x20", align: "top"), edit_member_path(member), :class => 'toolButton' %>
+          <%= link_to image_tag("friendship.png", title: "Add Friends", size: "20x20", align: "top"), '', :class => 'toolButton' %>
           <%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"), member, method: :delete, data: { confirm: "DELETE Member:\n#{member.name}\nAre you sure?" }, :class => 'toolButton' %>
         </td>
       </tr>

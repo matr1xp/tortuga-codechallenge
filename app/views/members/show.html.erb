@@ -12,8 +12,37 @@
   <%= @member.website %> (<%= link_to @member.short_url,  @member.short_url, :target => "_blank" %>)
 </h3>
 
+<% if @friends.any? %>
+<h4>Friends</h4>
+<table id="Friends" class="blueTable" >
+  <thead>
+    <tr>
+    <th>Name</th>
+    <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @friends.each do |friend| %>
+      <tr>
+        <td><%= link_to friend.name, "/members/#{friend.id}" %></td>
+        <td><%= link_to friend.short_url, friend.short_url, :target => "_blank" %></td>
+       </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
 <br/>
 <br/>
 
 <%= link_to image_tag("edit.png", title: "Edit", size: "20x20", align: "top"), edit_member_path(@member), :class => 'toolButton' %>
+<%= link_to image_tag("friendship.png", title: "Select Friends", size: "20x20", align: "top"), "/friendships/select/#{@member.id}",
+{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg toolButton'} %>
+<%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"), '', method: :delete, data: { confirm: "DELETE Member:\n#{@member.name}\nAre you sure?" }, :class => 'toolButton' %>
 <%= link_to image_tag("back.png", title: "Back", size: "20x20", align: "top"), members_path, :class => 'toolButton' %>
+
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>

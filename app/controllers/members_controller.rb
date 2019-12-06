@@ -1,17 +1,17 @@
-require 'shorturl_at'
-
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
   # GET /members
-  # GET /members.json
   def index
     @members = Member.all
   end
 
   # GET /members/1
-  # GET /members/1.json
   def show
+    me = params[:id]
+    @member = Member.find(me)
+    @friends = @member.friends
+    @others = Member.where.not(id: me).collect{|o| [o.id, o.name, o.short_url]}    
   end
 
   # GET /members/new
@@ -24,7 +24,6 @@ class MembersController < ApplicationController
   end
 
   # POST /members
-  # POST /members.json
   def create
     @member = Member.new(member_params)
     @member.short_url = ShorturlAt.shorten(member_params[:website])
@@ -39,7 +38,6 @@ class MembersController < ApplicationController
   end
 
   # PATCH/PUT /members/1
-  # PATCH/PUT /members/1.json
   def update
     attributes = member_params.clone
     if @member.website != attributes[:website]
@@ -56,7 +54,6 @@ class MembersController < ApplicationController
   end
 
   # DELETE /members/1
-  # DELETE /members/1.json
   def destroy
     @member.destroy
     respond_to do |format|
@@ -72,6 +69,6 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, :website, :heading, :short_url, :friend_id)
+      params.require(:member).permit(:name, :website, :heading, :short_url)
     end
 end

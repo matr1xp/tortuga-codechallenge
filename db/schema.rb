@@ -10,16 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191205062316) do
+ActiveRecord::Schema.define(version: 20191206073901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "friends", force: :cascade do |t|
+  create_table "friendships", force: :cascade do |t|
     t.integer  "member_id"
+    t.integer  "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_friends_on_member_id", using: :btree
+    t.index ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+    t.index ["member_id", "friend_id"], name: "index_friendships_on_member_id_and_friend_id", unique: true, using: :btree
+    t.index ["member_id"], name: "index_friendships_on_member_id", using: :btree
   end
 
   create_table "members", force: :cascade do |t|
@@ -31,4 +34,6 @@ ActiveRecord::Schema.define(version: 20191205062316) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "friendships", "members"
+  add_foreign_key "friendships", "members", column: "friend_id"
 end
