@@ -5,10 +5,26 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Solway&display=swap' %>
+    <%= stylesheet_link_tag 'navbar' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'navbar' %>
   </head>
 
   <body>
-    <%= yield %>
+  	<div class="topnav" id="myTopnav">
+	  <a id="home" href="/" onClick="highlight('home');">Home</a>
+	  <a id="member" href="/members" onClick="highlight('member');">Member</a>
+	  <a id="search" href="/search" onClick="highlight('search');">Search</a>
+	  <a href="javascript:void(0);" class="icon" onclick="showHamburg()">
+	    <i class="fa fa-bars"></i>
+	  </a>
+	</div>
+  	<div class='rg-container'>
+  		<span id="notice"><%= notice %></span>
+  		<%= yield %>
+  		<%= insert_paloma_hook %>
+    </div>
   </body>
 </html>

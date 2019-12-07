@@ -6,10 +6,10 @@ class FriendshipsController < ApplicationController
   def create
   	respond_to do |format|
   	  result = true
-  	  
   	  if (params[:friendship].is_a? Object) and (params[:friendship].is_a? Array)
-  	  	clean = params[:friendship].reject{|p| !p[:friend_id].is_a? String }
-  	  	clean.each do |fr|
+        Member.find(params[:member_id]).friends.delete_all
+        add_friend = params[:friendship].reject{|p| !p[:friend_id].is_a? String }
+  	  	add_friend.each do |fr|
 	  	  	permitted = fr.permit(:member_id, :friend_id)
 	      	@friends = Friendship.new(permitted)
 	      	begin
@@ -17,7 +17,7 @@ class FriendshipsController < ApplicationController
 	  	    rescue ActiveRecord::RecordNotUnique => e
 	  	    	puts "*** Skipping record friend_id = #{permitted[:friend_id]}} ***"
 	  	    end
-	  	end
+	  	  end        
   	  end
 
       if result

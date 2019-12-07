@@ -60,3 +60,5 @@ gem "shorturl_at", "~> 0.1.0"
 
 
 gem "hirb", "~> 0.7.3"
+
+gem "paloma", "~> 5.1"

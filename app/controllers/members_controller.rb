@@ -3,7 +3,10 @@ class MembersController < ApplicationController
 
   # GET /members
   def index
-    @members = Member.all
+    @members = Member.includes(:friends).all
+    @members.each do |member|
+      member.friend_count = member.friends.count
+    end
   end
 
   # GET /members/1

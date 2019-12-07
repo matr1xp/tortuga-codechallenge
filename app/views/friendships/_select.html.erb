@@ -1,6 +1,6 @@
 <div class="container popup">
 	<div class="modal-header">
-	  <button type="button" class="close" data-dismiss="modal">x</button>
+	  <button type="button" class="close" data-dismiss="modal" onclick="hideModal();">x</button>
 	</div>
 	<div class="modal-body">
 	    <h1><%= "Select friends for #{@member.name}" %></h1>
@@ -27,13 +27,9 @@
 				</table>
 				<div class="modal-footer">
 				  <div class="row">
-				  	<div class="col-25"></div>
-				  	<div class="col-75">
-				  		<div class="col-34">
-					  		<%= hidden_field_tag "member_id", @member.id %>
-					  		<%= submit_tag("Update", :class=> "cmdButton") %>
-				  		</div>
-				  	</div>
+				  	<br/>
+				  	<%= hidden_field_tag "member_id", @member.id %>
+					<%= submit_tag("Update", :class=> "block") %>
 				  </div>
 				</div>
 			<% end %>

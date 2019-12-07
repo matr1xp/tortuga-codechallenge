@@ -16,13 +16,13 @@
  body {
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: 'Solway', serif;
   font-size: 1em;
   line-height: 18px;
-  margin: 33px;
+  margin: 22px;
 }
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: 'Solway', serif;
   font-size: 1em;
   line-height: 18px;
   margin: 33px;
@@ -34,15 +34,20 @@ pre {
 }
 a {
   color: #000;
-
+  text-decoration: none;
   &:visited {
     color: #666;
   }
 
   &:hover {
     color: #fff;
-    background-color: #000;
+    background-color: #DAF7A6;
   }
+}
+/* mouse over link */
+a:hover {
+  color: green;
+  background-color: #DAF7A6;
 }
 div {
   &.field, &.actions {
@@ -51,6 +56,7 @@ div {
 }
 #notice {
   color: green;
+  background-color: #DAF7A6;
 }
 .field_with_errors {
   padding: 2px;
@@ -83,6 +89,12 @@ div {
 label {
   display: block;
 }
+
+label.required:after{content:" *"}
+
+.float-right {
+  float: right;
+}
 .cmdButton {
   box-shadow: 0px 10px 14px -7px #276873;
   background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
@@ -91,7 +103,7 @@ label {
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-family:Arial;
+  font-family: Arial;
   font-size:16px;
   font-weight:bold;
   padding:13px 32px;
@@ -107,10 +119,8 @@ label {
   top:1px;
 }
 .footer {
-  position: fixed;
   left: 0;
-  width: 100%;
-  color: white;
+  width: 90%;
   text-align: center;
   padding-top: 10px;
 }
@@ -153,7 +163,7 @@ label {
  */
  /* info (hed, dek, source, credit) */
 .rg-container {
-  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-family: 'Solway', serif;
   font-size: 16px;
   line-height: 1.4;
   margin: 0;
@@ -268,7 +278,7 @@ td.number {
   table.rg-table tr {
     border-bottom: none;
     margin: 0 0 1em 0;
-    padding: 0.5em;
+    /*padding: 0.5em;*/
   }
   table.rg-table tr.highlight {
     background-color: inherit !important;
@@ -351,13 +361,6 @@ input[type=submit] {
   margin-top: 6px;
 }
 
-.col-34 {
-  float: left;
-  width: 34%;
-  margin-top: 6px;
-  padding: 0px 10px 0px 10px;
-}
-
 /* Floating column for inputs: 75% width */
 .col-75 {
   float: left;
@@ -380,3 +383,24 @@ input[type=submit] {
   }
 }
 
+/* Button full width */
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #4CAF50;
+  padding: 14px 28px;
+  font-size: 1em;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.button.row {
+  padding: 5px;
+}

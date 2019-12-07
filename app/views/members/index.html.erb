@@ -1,33 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<div class='rg-container'>
-  <h1>
-    Expert Search Tool
-  </h1>
-  <table class='rg-table zebra' summary='Members'>
-    <caption class='rg-header'>
-      <span class='rg-hed'>Members</span>
-      <span class='rg-dek'>List of all our experts</span>
-    </caption>
-    <thead>
-      <tr>
-        <th class='text '>Name</th>
-        <th class='text '>Short URL</th>
-        <th class='number '>Friends</th>
+<h1>
+  Expert Search Tool
+</h1>
+<table class='rg-table zebra' summary='Members'>
+  <caption class='rg-header'>
+    <span class='rg-hed'>Members</span>
+    <span class='rg-dek'>List of all our experts</span>
+  </caption>
+  <thead>
+    <tr>
+      <th class='text '>Name</th>
+      <th class='text '>Short URL</th>
+      <th class='number '>Friends</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr class=''>
+        <td class='text ' data-title='Name'><%= link_to member.name, "/members/#{member.id}" %></td>
+        <td class='text ' data-title='Short URL'><%= link_to member.short_url, member.short_url, :target => "_blank" %></td>
+        <td class='number ' data-title='Friends'><%= member.friend_count %></td>
       </tr>
-    </thead>
-    <tbody>
-      <% @members.each do |member| %>
-        <tr class=''>
-          <td class='text ' data-title='Name'><%= link_to member.name, "/members/#{member.id}" %></td>
-          <td class='text ' data-title='Short URL'><%= link_to member.short_url, member.short_url, :target => "_blank" %></td>
-          <td class='number ' data-title='Friends'><%= Member.find(member.id).friends.count %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="footer">
-    <%= link_to 'Create new', new_member_path, :class=> "cmdButton" %>
-  </div>
+    <% end %>
+  </tbody>
+</table>
+<div class="footer">
+  <%= link_to 'Create new', new_member_path, :class=> "block" %>
 </div>
 
