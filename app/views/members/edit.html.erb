@@ -1,36 +1,58 @@
-<h1>Editing Member</h1>
-
-<% if @member.errors.any? %>
-<p> Please correct the following errors before proceeding:</p>
-<ul>
-  <% @member.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div class='rg-container'>
+  <h1>Editing Member</h1>
+  <% if @member.errors.any? %>
+  <p> Please correct the following errors before proceeding:</p>
+  <ul>
+    <% @member.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
-<% end %>
-
-<%= form_for @member do |form| %>
-  <%= label_tag(:name, "Name") %>
-  <%= form.text_field(:name, size: 50) %>
-
-  <%= label_tag(:website, "Website") %>
-  <%= form.text_field(:website, size: 50) %>
-  
-  <%= label_tag(:heading, "Heading") %>
-  <%= form.text_field(:heading, size: 50) %>
-   
-  <%= form.hidden_field(:short_url) %>
-  <br/>
-  <br/>
-  
-  <%= submit_tag("Update", :class=> "cmdButton") %>
-  <%= submit_tag("Reset", { :name => 'reset', :id => 'reset', :type => 'reset', :class => "cmdButton"}) %> 
-<% end %>
-
-<br/>
-<br/>
-
-<%= link_to image_tag("show.png", title: "Show", size: "20x20", align: "top"),  @member, :class => 'toolButton' %>
-<%= link_to image_tag("friendship.png", title: "Add Friends", size: "20x20", align: "top"), '', :class => 'toolButton' %>
-<%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"), '', method: :delete, data: { confirm: "DELETE Member:\n#{@member.name}\nAre you sure?" }, :class => 'toolButton' %>
-<%= link_to image_tag("back.png", title: "Back", size: "20x20", align: "top"), members_path, :class => 'toolButton' %>
+  <div class="container">
+  <%= form_for @member do |form| %>
+    <div class="row">
+      <div class="col-25">
+        <%= label_tag(:name, "Name") %>
+      </div>
+      <div class="col-75">
+        <%= form.text_field(:name, size: 50) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <%= label_tag(:heading, "Heading") %>
+      </div>
+      <div class="col-75">
+        <%= form.text_field(:heading, size: 50) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <%= label_tag(:website, "Website") %>
+      </div>
+      <div class="col-75">
+          <%= form.text_field(:website, size: 50) %>
+          <%= form.hidden_field(:short_url) %>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-25"></div>        
+      <div class="col-75">  
+        <div class="col-34">
+          <%= submit_tag("Update", { :class=> "cmdButton" }) %>
+        </div>
+        <div class="col-34">
+          <%= submit_tag("Reset", { :name => 'reset', :id => 'reset', :type => 'reset', :class => "cmdButton"}) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  <div class="footer">
+    <%= link_to image_tag("show.png", title: "Show", size: "20x20", align: "top"),  @member, :class => 'toolButton' %>
+    <%= link_to image_tag("friendship.png", title: "Add Friends", size: "20x20", align: "top"), '', :class => 'toolButton' %>
+    <%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"), '', method: :delete, data: { confirm: "DELETE Member:\n#{@member.name}\nAre you sure?" }, :class => 'toolButton' %>
+    <%= link_to image_tag("back.png", title: "Back", size: "20x20", align: "top"), members_path, :class => 'toolButton' %>
+  </div>
+</div>

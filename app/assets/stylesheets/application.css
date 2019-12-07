@@ -17,20 +17,20 @@
   background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 1em;
   line-height: 18px;
   margin: 33px;
 }
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 1em;
   line-height: 18px;
   margin: 33px;
 }
 pre {
   background-color: #eee;
   padding: 10px;
-  font-size: 16px;
+  font-size: 1em;
 }
 a {
   color: #000;
@@ -83,73 +83,6 @@ div {
 label {
   display: block;
 }
-table#Members {
-  width: 60%;
-}
-table#Friends {
-  width: 50%;
-}
-table#SelectFriends {
-  width: 30%;
-}
-table.blueTable {
-  border: 1px solid #1C6EA4;
-  background-color: #EEEEEE;
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-table.blueTable td, table.blueTable th {
-  border: 1px solid #AAAAAA;
-  padding: 3px 2px;
-}
-table.blueTable tbody td {
-  font-size: 16px;
-  padding-left: 10px;
-}
-table.blueTable tr:nth-child(even) {
-  background: #D0E4F5;
-}
-table.blueTable thead {
-  background: #1C6EA4;
-  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  border-bottom: 2px solid #444444;
-}
-table.blueTable thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
-  border-left: 2px solid #D0E4F5;
-  padding-left: 5px;
-}
-table.blueTable thead th:first-child {
-  border-left: none;
-}
-table.blueTable tfoot {
-  font-size: 14px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background: #D0E4F5;
-  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  border-top: 2px solid #444444;
-}
-table.blueTable tfoot td {
-  font-size: 14px;
-}
-table.blueTable tfoot .links {
-  text-align: right;
-}
-table.blueTable tfoot .links a{
-  display: inline-block;
-  background: #1C6EA4;
-  color: #FFFFFF;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
 .cmdButton {
   box-shadow: 0px 10px 14px -7px #276873;
   background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
@@ -173,6 +106,14 @@ table.blueTable tfoot .links a{
   position:relative;
   top:1px;
 }
+.footer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+}
 .toolButton {
   box-shadow: 0px 10px 14px -7px #276873;
   background-color:white;
@@ -195,8 +136,247 @@ table.blueTable tfoot .links a{
   top:1px;
 }
 input {
-  font-size: 16px;
+  font-size: 1em;
 }
 label {
   padding: 10px 0px 10px;
 }
+.popup {
+  width: 90%;
+}
+.center {
+  text-align: center;
+  float: center;
+}
+/**
+ * Responsive Table styles
+ */
+ /* info (hed, dek, source, credit) */
+.rg-container {
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0;
+  padding: 1em 0.5em;
+  color: #222;
+}
+.rg-header {
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+.rg-header > * {
+  display: block;
+}
+.rg-hed {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+.rg-dek {
+  font-size: 1em;
+}
+
+.rg-source {
+  margin: 0;
+  font-size: 0.75em;
+  text-align: right;
+}
+.rg-source .pre-colon {
+  text-transform: uppercase;
+}
+
+.rg-source .post-colon {
+  font-weight: bold;
+}
+
+/* table */
+table.rg-table {
+  width: 100%;
+  margin-bottom: 0.5em;
+  font-size: 1em;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table.rg-table tr {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-align: left;
+  color: #333;
+}
+table.rg-table thead {
+  border-bottom: 3px solid #ddd;
+}
+table.rg-table tr {
+  border-bottom: 1px solid #ddd;
+  color: #222;
+}
+table.rg-table tr.highlight {
+  background-color: #dcf1f0 !important;
+}
+table.rg-table.zebra tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+table.rg-table th {
+  font-weight: bold;
+  padding: 0.35em;
+  font-size: 0.9em;
+}
+table.rg-table td {
+  padding: 0.35em;
+  font-size: 0.9em;
+}
+table.rg-table .highlight td {
+  font-weight: bold;
+}
+table.rg-table th.number,
+td.number {
+  text-align: right;
+}
+
+/* media queries */
+@media screen and (max-width: 600px) {
+  .rg-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  table.rg-table {
+    width: 100%;
+  }
+  table.rg-table tr.hide-mobile,
+  table.rg-table th.hide-mobile,
+  table.rg-table td.hide-mobile {
+    display: none;
+  }
+  table.rg-table thead {
+    display: none;
+  }
+  table.rg-table tbody {
+    width: 100%;
+  }
+  table.rg-table tr,
+  table.rg-table th,
+  table.rg-table td {
+    display: block;
+    padding: 0;
+  }
+  table.rg-table tr {
+    border-bottom: none;
+    margin: 0 0 1em 0;
+    padding: 0.5em;
+  }
+  table.rg-table tr.highlight {
+    background-color: inherit !important;
+  }
+  table.rg-table.zebra tr:nth-child(even) {
+    background-color: transparent;
+  }
+  table.rg-table.zebra td:nth-child(even) {
+    background-color: #f6f6f6;
+  }
+  table.rg-table tr:nth-child(even) {
+    background-color: transparent;
+  }
+  table.rg-table td {
+    padding: 0.5em 0 0.25em 0;
+    border-bottom: 1px dotted #ccc;
+    text-align: right;
+  }
+  table.rg-table td[data-title]:before {
+    content: attr(data-title);
+    font-weight: bold;
+    display: inline-block;
+    content: attr(data-title);
+    float: left;
+    margin-right: 0.5em;
+    font-size: 0.95em;
+  }
+  table.rg-table td:last-child {
+    padding-right: 0;
+    border-bottom: 2px solid #ccc;
+  }
+  table.rg-table td:empty {
+    display: none;
+  }
+  table.rg-table .highlight td {
+    background-color: inherit;
+    font-weight: normal;
+  }
+}
+/**
+ * Responsive Form
+ */
+ input[type=text], select, textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Style the label to display next to the inputs */
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+/* Style the container */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Floating column for labels: 25% width */
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-34 {
+  float: left;
+  width: 34%;
+  margin-top: 6px;
+  padding: 0px 10px 0px 10px;
+}
+
+/* Floating column for inputs: 75% width */
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+

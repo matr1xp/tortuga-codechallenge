@@ -1,42 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Members</h1>
-
-<table id="Members" class="blueTable">
-  <thead>
-    <tr>
-    <th>Name</th>
-    <th>Short URL</th>
-    <th>Friends</th>
-    <th style="display:none"></th>
-    </tr>
-  </thead>
-  <!--
-  <tfoot>
-  <tr>
-    <td colspan="4">
-    <div class="links"><a href="#">&laquo;</a> <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">&raquo;</a></div>
-    </td>
-  </tr>
-  </tfoot>
-  -->
-  <tbody>
-    <% @members.each do |member| %>
+<div class='rg-container'>
+  <h1>
+    Expert Search Tool
+  </h1>
+  <table class='rg-table zebra' summary='Members'>
+    <caption class='rg-header'>
+      <span class='rg-hed'>Members</span>
+      <span class='rg-dek'>List of all our experts</span>
+    </caption>
+    <thead>
       <tr>
-        <td><%= link_to member.name, "/members/#{member.id}" %></td>
-        <td><%= link_to member.short_url, member.short_url, :target => "_blank" %></td>
-        <td><%= Member.find(member.id).friends.count %></td>
-        <td style="display:none">
-          <%= link_to image_tag("show.png", title: "Show", size: "20x20", align: "top"), member, :class => 'toolButton'%>
-          <%= link_to image_tag("edit.png", title: "Edit", size: "20x20", align: "top"), edit_member_path(member), :class => 'toolButton' %>
-          <%= link_to image_tag("friendship.png", title: "Add Friends", size: "20x20", align: "top"), '', :class => 'toolButton' %>
-          <%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"), member, method: :delete, data: { confirm: "DELETE Member:\n#{member.name}\nAre you sure?" }, :class => 'toolButton' %>
-        </td>
+        <th class='text '>Name</th>
+        <th class='text '>Short URL</th>
+        <th class='number '>Friends</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @members.each do |member| %>
+        <tr class=''>
+          <td class='text ' data-title='Name'><%= link_to member.name, "/members/#{member.id}" %></td>
+          <td class='text ' data-title='Short URL'><%= link_to member.short_url, member.short_url, :target => "_blank" %></td>
+          <td class='number ' data-title='Friends'><%= Member.find(member.id).friends.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="footer">
+    <%= link_to 'Create new', new_member_path, :class=> "cmdButton" %>
+  </div>
+</div>
 
-<br>
-
-<%= link_to 'Create new', new_member_path, :class=> "cmdButton" %>

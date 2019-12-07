@@ -1,35 +1,42 @@
-<br/>
-<br/>
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal">x</button>
-  <h4 class="modal-title" id="myModalLabel">Select Friends</h4>
-</div>
-<div class="modal-body">
-    <h1><%= "Select friends for #{@member.name}" %></h1>
-	<% if @members.any? %>
-		<%= form_for @friendship do |friendship_form| %>
-			<h4>Friends</h4>
-			<table id="SelectFriends" class="blueTable" >
-			  <thead>
-			    <tr>
-			    <th>Name</th>
-			    <th>Friend</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <% @members.each do |member, idx| %>
-			      <tr>
-			        <td><%= hidden_field_tag "friendship[#{idx}][member_id]", @member.id %><%= link_to member.name, "/members/#{member.id}" %></td>
-			        <td><%= check_box_tag "friendship[#{idx}][friend_id]", member.id, (!@friends.detect{|f| f.id == member.id}.nil?) %></td>
-			      </tr>
-			    <% end %>
-			  </tbody>
-			</table>
-			<br/>
-			<div class="modal-footer">
-			  <%= hidden_field_tag "member_id", @member.id %>
-			  <%= submit_tag("Update", :class=> "cmdButton") %>
-			</div>
+<div class="container popup">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal">x</button>
+	</div>
+	<div class="modal-body">
+	    <h1><%= "Select friends for #{@member.name}" %></h1>
+		<% if @members.any? %>
+			<%= form_for @friendship do |friendship_form| %>
+				<table class='rg-table zebra' summary='Friends'>
+					<caption class='rg-header'>
+		  				<span class='rg-hed'>Friends</span>
+					</caption>
+				  <thead>
+				    <tr>
+				    <th>Name</th>
+				    <th>Friend</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <% @members.each do |member, idx| %>
+				      <tr class=''>
+				        <td><%= hidden_field_tag "friendship[#{idx}][member_id]", @member.id %><%= link_to member.name, "/members/#{member.id}" %></td>
+				        <td><%= check_box_tag "friendship[#{idx}][friend_id]", member.id, (!@friends.detect{|f| f.id == member.id}.nil?) %></td>
+				      </tr>
+				    <% end %>
+				  </tbody>
+				</table>
+				<div class="modal-footer">
+				  <div class="row">
+				  	<div class="col-25"></div>
+				  	<div class="col-75">
+				  		<div class="col-34">
+					  		<%= hidden_field_tag "member_id", @member.id %>
+					  		<%= submit_tag("Update", :class=> "cmdButton") %>
+				  		</div>
+				  	</div>
+				  </div>
+				</div>
+			<% end %>
 		<% end %>
-	<% end %>
+	</div>
 </div>
