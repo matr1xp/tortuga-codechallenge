@@ -11,24 +11,30 @@ class Member < ApplicationRecord
     where.not(id: id)
   end
 
-  def self.search(pattern, id=nil)
-    if pattern.blank?  # blank? covers both nil and empty string
+  def self.search(term, id=nil)
+    if term.blank?  # blank? covers both nil and empty string
       all
     else
-      # Break down pattern to phrases	
-      # 1. Filter out "stop words"
-      
-      words = pattern.downcase.scan(/\w+/)
-      keywords = words.select { |word| !$stop_words.include?(word) }
+      keywords = sanitize_search(term)
+      return none if keywords.blank?
 
       puts "#################################"
       puts "# Running Search #{id} "
-      puts "# q: #{pattern}"
-      puts "# keywords: #{keywords.join(' ')}"
+      puts "# q: #{term}"
+      puts "# keywords: #{keywords}"
       puts "#################################}"
       
-      # where('heading ILIKE ?', "%#{pattern}%")
-      where('heading ilike any (array[?])', keywords.map {|s| "%#{s}%"})      
+      # where('heading ILIKE ?', "%#{term}%")
+      # where('heading ilike any (array[?])', keywords.map {|s| "%#{s}%"})
+      where("members.tsv @@ to_tsquery(#{keywords})").order("ts_rank_cd(members.tsv, #{keywords}) DESC")
+
     end
+  end
+
+  def self.sanitize_search(query)
+    # Break down term to phrases and strip of stop words  
+    words = query.downcase.scan(/\w+/)
+    keywords = words.select { |word| !$stop_words.include?(word) }.join(' & ') # format for Postgres tsquery
+    sanitize keywords
   end
 end
