@@ -1,0 +1,51 @@
+<div class="container popup">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal" onclick="hideModal();">x</button>
+	</div>
+	<div class="modal-body">
+	    <h1><%= "Search similar members like #{@member.name}" %></h1>
+	    <div class="container">
+	    <% if @member %>
+			<%= form_for @search, :url => search_path, :method => 'post' do |form| %>
+			  <div class="row">
+			    <div class="col-25">
+			      <%= label_tag(:name, "Search for") %>
+			    </div>
+			    <div class="col-75">
+			      <%= form.text_field(:query, size: 50) %>
+			    </div>
+			  </div>
+			  <div class="row">
+			  	<%= form.hidden_field(:member_id) %>
+			  </div>
+			  <hr>
+			  <% if @search.results %>
+			  <table class='rg-table zebra' summary='Members found'>
+			    <caption class='rg-header'>
+			      <span class='rg-hed'>Members</span>
+			    </caption>
+			    <thead>
+			      <tr>
+			        <th class='text '>Name</th>
+			        <th class='text '>Path</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @members.each do |member| %>
+			        <tr class=''>
+			          <td class='text ' data-title='Name'><%= link_to member.name, "/members/#{member.id}" %></td>
+			          <td class='text ' data-title='Path'></td>
+			        </tr>
+			      <% end %>
+			    </tbody>
+			  </table>
+			  <% end %>
+			  <div class="row">
+    			<%= submit_tag("Search", { :class=> "block" }) %>
+  			  </div>
+			<% end %>
+		<% end %>
+		</div>
+	</div>
+</div>
+<p>New</p>

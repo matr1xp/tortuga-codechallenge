@@ -1,0 +1,25 @@
+<% if @member %>
+	<%= form_for @search, :url => search_path do |form| %>
+	  <ul>
+	    <% @search.errors.full_messages.each do |msg| %>
+	    <li><%= msg %></li>
+	  <% end %>
+	  </ul>
+	  <div class="row">
+	    <div class="col-25">
+	      <%= label_tag(:name, "Search for") %>
+	    </div>
+	    <div class="col-75">
+	      <%= form.text_field(:query, size: 50) %>
+	    </div>
+	  </div>
+	  <div class="row">
+	  	<%= form.hidden_field(:member_id, :value => @member.id) %>
+	  </div>
+	  <hr>
+	  <%= render "result" %>
+	  <div class="row">
+		<%= submit_tag("Search", { :class=> "block" }) %>
+	  </div>
+	<% end %>
+<% end %>

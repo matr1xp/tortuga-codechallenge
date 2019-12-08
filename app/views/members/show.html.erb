@@ -1,12 +1,15 @@
 <div class="float-right">
   <div class="button row">
-  <%= link_to image_tag("user.png", title: "Delete", size: "20x20", align: "top"),  '' , method: :delete, data: { confirm: "DELETE Member:\n#{@member.name}\nAre you sure?" }, :class => 'toolButton' %>
+  <%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"),  '' , method: :delete, data: { confirm: "DELETE Member:\n#{@member.name}\nAre you sure?" }, :class => 'toolButton' %>
   </div>
   <div class="button row">
   <%= link_to image_tag("add-friend.png", title: "Add Friends", size: "20x20", align: "top"), "/friendships/select/#{@member.id}", :remote => true, :class => 'toolButton', :onclick => "showModal();" %>
   </div>
   <div class="button row">
-    <%= link_to image_tag("show.png", title: "Find similar", size: "20x20", align: "top"), "/search/#{@member.id}", :remote => true, :class => 'toolButton', :onclick => "showModal();" %>
+    <%= link_to image_tag("show.png", title: "Find similar", size: "20x20", align: "top"), "/search/member/#{@member.id}", :remote => true, :class => 'toolButton', :onclick => "showModal();" %>
+  </div>
+  <div class="button row">
+    <%= link_to image_tag("back.png", title: "Go back", size: "20x20", align: "top"), :back, :class => 'toolButton' %>
   </div>
 </div>
 <div id="main-window">
@@ -35,7 +38,7 @@
       <% @friends.each do |friend| %>
         <tr class=''>
           <td class='text ' data-title='Name'><%= link_to friend.name, "/members/#{friend.id}" %></td>
-          <td class='text ' data-title='Short URL'><%= link_to friend.short_url, friend.short_url, :target => "_blank" %></td>
+          <td class='text ' data-title='Page'><%= link_to friend.short_url, friend.short_url, :target => "_blank" %></td>
         </tr>
       <% end %>
     </tbody>

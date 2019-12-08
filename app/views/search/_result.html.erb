@@ -1,0 +1,29 @@
+<% if @members && !@members.empty? %>
+  <table class='rg-table zebra' summary='Members found'>
+    <caption class='rg-header'>
+      <span class='rg-hed'>Members</span>
+    </caption>
+    <thead>
+      <tr>
+        <th class='text '>Name</th>
+        <th class='text '>Path</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @members.each do |member| %>
+        <% if member.search_score != 0 %>
+          <tr>
+            <td class='text ' data-title='Name'><%= link_to member.name, "/members/#{member.id}" %></td>
+            <td class='text ' data-title='Path'>
+            	<%= member.friend_connection %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+ <% else %>
+  <div class="row">
+	<h2> No results found! </h2>
+  </div>
+ <% end %>

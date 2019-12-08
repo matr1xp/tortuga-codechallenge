@@ -4,8 +4,13 @@ class MembersController < ApplicationController
   # GET /members
   def index
     @members = Member.includes(:friends).all
-    @members.each do |member|
-      member.friend_count = member.friends.count
+    if @member
+      @current = @member.id 
+    else
+      @current = Member.first[:id] if Member.any?
+    end
+    if !@members.any?
+      flash[:notice] = "No members found! Please create your first member now by clicking on button below."
     end
   end
 
@@ -14,12 +19,14 @@ class MembersController < ApplicationController
     me = params[:id]
     @member = Member.find(me)
     @friends = @member.friends
-    @others = Member.where.not(id: me).collect{|o| [o.id, o.name, o.short_url]}    
+    @others = Member.where.not(id: me).collect{|o| [o.id, o.name, o.short_url]}  
+    @current = @member.id  
   end
 
   # GET /members/new
   def new
     @member = Member.new
+    flash[:notice] = nil
   end
 
   # GET /members/1/edit
@@ -43,9 +50,9 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1
   def update
     attributes = member_params.clone
+    # We only process short urls if website changed
     if @member.website != attributes[:website]
        attributes[:short_url] = ShorturlAt.shorten(member_params[:website])
-       puts "**** Website changed! Generating new SHORT URL ****"
     end
     respond_to do |format|
       if @member.update(attributes)

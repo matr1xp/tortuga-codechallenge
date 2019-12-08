@@ -40,9 +40,8 @@ Paloma.controller('Members', {
 });
 
 Paloma.controller('Search', {
-  index: function(){
-    // Executes when Rails Members#index is executed.
-    highlight('search');
-  }
+  index: function(){ highlight('search'); },
+  show: function(){ highlight('search'); },
+  create: function(){ highlight('search'); },
 });
 

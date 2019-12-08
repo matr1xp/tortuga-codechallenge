@@ -13,18 +13,16 @@
  *= require_tree .
  *= require_self
  */
- body {
+body {
   background-color: #fff;
   color: #333;
   font-family: 'Solway', serif;
-  font-size: 1em;
-  line-height: 18px;
+  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));
   margin: 22px;
 }
 p, ol, ul, td {
   font-family: 'Solway', serif;
-  font-size: 1em;
-  line-height: 18px;
   margin: 33px;
 }
 pre {
@@ -157,6 +155,9 @@ label {
 .center {
   text-align: center;
   float: center;
+}
+.spacer-50 {
+  height: 50px;
 }
 /**
  * Responsive Table styles

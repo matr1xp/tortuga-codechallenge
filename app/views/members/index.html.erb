@@ -1,3 +1,4 @@
+<% if @members.any? %>
 <h1>
   Expert Search Tool
 </h1>
@@ -14,15 +15,18 @@
     </tr>
   </thead>
   <tbody>
-    <% @members.each do |member| %>
+  <% @members.each do |member| %>
       <tr class=''>
         <td class='text ' data-title='Name'><%= link_to member.name, "/members/#{member.id}" %></td>
         <td class='text ' data-title='Short URL'><%= link_to member.short_url, member.short_url, :target => "_blank" %></td>
-        <td class='number ' data-title='Friends'><%= member.friend_count %></td>
+        <td class='number ' data-title='Friends'><%= member.friends.length %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+<div class="spacer-50"></div>
+<% end %>
 <div class="footer">
   <%= link_to 'Create new', new_member_path, :class=> "block" %>
 </div>

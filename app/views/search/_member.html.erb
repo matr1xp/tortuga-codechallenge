@@ -1,0 +1,11 @@
+<div class="container popup">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal" onclick="hideModal();">x</button>
+	</div>
+	<div class="modal-body">
+	    <h1><%= "Search similar members like #{@member.name}" %></h1>
+	    <div class="container">
+	    	<%= render "search" %>
+		</div>
+	</div>
+</div>

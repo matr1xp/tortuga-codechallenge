@@ -7,7 +7,7 @@ class FriendshipsController < ApplicationController
   	respond_to do |format|
   	  result = true
   	  if (params[:friendship].is_a? Object) and (params[:friendship].is_a? Array)
-        Member.find(params[:member_id]).friends.delete_all
+        Member.find_by_id(params[:member_id]).friends.delete_all
         add_friend = params[:friendship].reject{|p| !p[:friend_id].is_a? String }
   	  	add_friend.each do |fr|
 	  	  	permitted = fr.permit(:member_id, :friend_id)
@@ -30,7 +30,6 @@ class FriendshipsController < ApplicationController
 
   def select
   	@friendship = Friendship.new
-  	puts @friends.inspect
   	respond_to do |format|
   		format.html
   		format.js
@@ -40,14 +39,11 @@ class FriendshipsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_members
-      @member = Member.find(params[:id])
-      @members = Member.where("id != #{params[:id]}")
-      
-      puts "#{@members.count} members"
-
+      @member = Member.find_by_id(params[:id])
+      @members = Member.where.not(id: params[:id])
     end
     def set_friends
-      @friends = Member.find(params[:id]).friends
+      @friends = Member.find_by_id(params[:id]).friends
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

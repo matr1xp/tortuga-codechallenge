@@ -1,5 +1,5 @@
 <div class="float-right">
-  <%= link_to image_tag("back.png", title: "Go back", size: "20x20", align: "top"),  "/members/#{@member.id}}", :class => 'toolButton' %>
+  <%= link_to image_tag("back.png", title: "Go back", size: "20x20", align: "top"),  :back, :class => 'toolButton' %>
 </div>
 <h1>Editing Member</h1>
 <% if @member.errors.any? %>

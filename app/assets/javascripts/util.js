@@ -7,8 +7,12 @@ function showModal() {
   $('#notice').hide();
 }
 function hideModal() {
-  $('#modal-window').hide();
-  $('#main-window').show();
+  if ($('#modal-window').length > 0) {
+	  $('#modal-window').hide();
+	  $('#main-window').show();
+  } else {
+  	window.history.back();
+  }
 }
 
 function highlight(id) {
