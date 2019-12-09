@@ -33,10 +33,12 @@ Paloma.controller('Members', {
     // Executes when Rails Members#index is executed.
     highlight('home');
     $("a#connect").hide();
+    $("a#search").hide();
   },
   new: function(){ 
     highlight('member');
     $("a#connect").hide();
+    $("a#search").hide();
   },
   create: function(){ 
     highlight('member');
@@ -45,11 +47,17 @@ Paloma.controller('Members', {
   show: function(){ 
     highlight('member'); 
     $("a#connect").show();
+    $("a#search").show();
   },
   edit: function(){ 
     highlight('member'); 
     $("a#connect").show();
+    $("a#search").show();
   },
+});
+
+Paloma.controller('Friendships', {
+  select: function(){ highlight('connect'); }
 });
 
 Paloma.controller('Search', {

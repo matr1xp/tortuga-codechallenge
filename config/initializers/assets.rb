@@ -12,3 +12,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( util.js )
 Rails.application.config.assets.precompile += %w( navbar.js )
 Rails.application.config.assets.precompile += %w( navbar.css )
+Rails.application.config.assets.precompile += %w( tables.css )

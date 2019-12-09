@@ -1,5 +1,4 @@
 class SearchController < ApplicationController
-  # before_action :set_members, only: [:member, :create, :show]
   before_action :set_member, only: [:new, :member, :create, :update]
   before_action :set_search, only: [:show, :update]
   before_action :search_params, only: [:create, :update]
@@ -16,12 +15,11 @@ class SearchController < ApplicationController
   	@search = Search.new
   	@search.query = @member.heading
   	@members = Member.search(@member.heading).exclude(params[:id]).includes(:friends)
-  	@current = @member.id
   end
 
   def show
     if @search
-      me = @search.member_id
+      me = @current = @search.member_id
       @member = Member.includes(:friends).find_by_id(me)
       @members = Member.search(@search.query, @search.id).exclude(me).includes(:friends)
       @members.each do |member|
@@ -32,8 +30,8 @@ class SearchController < ApplicationController
           common = member.friends & @member.friends
           if !common.empty?
             connection = []
-            common.each {|cf| connection.push "[<a href='/members/#{@member.id}' class='highlight3'>#{@member.name}</a>]   [<a href='/members/#{cf.id}' class='highlight1'>#{cf.name}</a>]   [<a href='/members/#{member.id}' class='highlight2'>#{member.name}</a>]"}
-            member.friend_connection = connection.join("\n")
+            common.each {|cf| connection.push "<a href='/members/#{@member.id}' class='highlight3'>#{@member.name}</a> &rarr; [<a href='/members/#{cf.id}' class='highlight1'>#{cf.name}</a>] &larr; <a href='/members/#{member.id}' class='highlight2'>#{member.name}</a>"}
+            member.friend_connection = connection.join("<br/>")
           else
             member.friend_connection = "No connection found!"
           end
@@ -75,6 +73,7 @@ class SearchController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_member
       @member = Member.find_by_id(params[:id])
+      @current = @member.id if @member
     end
     def set_members
       @members = Member.exclude(params[:id])

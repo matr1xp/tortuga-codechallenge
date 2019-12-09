@@ -37,3 +37,9 @@ For more information about using Ruby on Heroku, see these Dev Center articles:
 - [Ruby on Heroku](https://devcenter.heroku.com/categories/ruby)
 - [Getting Started with Ruby on Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby)
 - [Heroku Ruby Support](https://devcenter.heroku.com/articles/ruby-support)
+
+## TODOs
+
+- Mobile responsive design
+- Caching of search results
+- Unit testing

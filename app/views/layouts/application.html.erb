@@ -17,7 +17,7 @@
 	  <a id="home" href="/" onClick="highlight('home');">Home</a>
 	  <a id="member" href=<%= "/members/#{@current}" %> onClick="highlight('member');">Member</a>
     <a id="connect" href=<%= "/friendships/select/#{@current}" %> data-remote="true" onClick="highlight('connect'); showModal();">Connect</a>
-	  <a id="search" href=<%= "/search/member/#{@current}" %> onClick="highlight('search');">Search</a>
+	  <a id="search" href=<%= "/search/#{@current}" %> onClick="highlight('search');">Search</a>
 	  <a href="javascript:void(0);" class="icon" onclick="showHamburg()">
 	    <i class="fa fa-bars"></i>
 	  </a>
