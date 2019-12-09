@@ -7,8 +7,10 @@ class FriendshipsController < ApplicationController
   	respond_to do |format|
   	  result = true
   	  if (params[:friendship].is_a? Object) and (params[:friendship].is_a? Array)
-        Member.find_by_id(params[:member_id]).friends.delete_all
+        # We delete all friends first
+        Member.find_by_id(params[:member_id]).friends.destroy_all
         add_friend = params[:friendship].reject{|p| !p[:friend_id].is_a? String }
+        # then add friends one by one
   	  	add_friend.each do |fr|
 	  	  	permitted = fr.permit(:member_id, :friend_id)
 	      	@friends = Friendship.new(permitted)

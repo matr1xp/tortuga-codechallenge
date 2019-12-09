@@ -1,5 +1,11 @@
-<div class="modal-body">
-<h1><%= "Search similar members like #{@member.name}" %></h1>
-<div class="container">
-	<%= render "search" %>
+<div id="main-window">
+	<div class="float-right">
+	  <div class="button row">
+	    <%= link_to image_tag("back.png", title: "Go back", size: "20x20", align: "top"), :back, :class => 'toolButton' %>
+	  </div>
+	</div>
+	<h1><%= "Search experts for #{@member.name}" %></h1>
+	<div class="container">
+		<%= render "search" %>
+	</div>
 </div>

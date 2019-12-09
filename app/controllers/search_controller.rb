@@ -25,14 +25,17 @@ class SearchController < ApplicationController
       @member = Member.includes(:friends).find_by_id(me)
       @members = Member.search(@search.query, @search.id).exclude(me).includes(:friends)
       @members.each do |member|
-        # To get common friends, do array intersection &
+        # To get common friends, do array intersection `&`
         # but skip if they are already friends
-        if member.friends.pluck(:name).select{|x| x==@member.name}.length == 0
-          common = member.friends.pluck(:name) & @member.friends.pluck(:name)
+        if member.friends.select{|x| x.name == @member.name}.length == 0
+
+          common = member.friends & @member.friends
           if !common.empty?
             connection = []
-            common.each {|cf| connection.push "#{@member.name} => #{cf} => #{member.name}"}
+            common.each {|cf| connection.push "[<a href='/members/#{@member.id}' class='highlight3'>#{@member.name}</a>]   [<a href='/members/#{cf.id}' class='highlight1'>#{cf.name}</a>]   [<a href='/members/#{member.id}' class='highlight2'>#{member.name}</a>]"}
             member.friend_connection = connection.join("\n")
+          else
+            member.friend_connection = "No connection found!"
           end
         else
           member.friend_connection = "Already friends"

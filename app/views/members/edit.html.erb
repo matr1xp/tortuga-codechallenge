@@ -1,46 +1,49 @@
-<div class="float-right">
-  <%= link_to image_tag("back.png", title: "Go back", size: "20x20", align: "top"),  :back, :class => 'toolButton' %>
-</div>
-<h1>Editing Member</h1>
-<% if @member.errors.any? %>
-<p> Please correct the following errors before proceeding:</p>
-<ul>
-  <% @member.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+<div id="main-window">
+  <div class="float-right">
+    <%= link_to image_tag("back.png", title: "Go back", size: "20x20", align: "top"),  :back, :class => 'toolButton' %>
+  </div>
+  <h1>Editing Member</h1>
+  <% if @member.errors.any? %>
+  <p> Please correct the following errors before proceeding:</p>
+  <ul>
+    <% @member.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
-<% end %>
-<div class="container">
-<%= form_for @member do |form| %>
-  <div class="row">
-    <div class="col-25">
-      <%= label_tag(:name, "Name") %>
+  <div class="container">
+  <%= form_for @member do |form| %>
+    <div class="row">
+      <div class="col-25">
+        <%= label_tag(:name, "Name") %>
+      </div>
+      <div class="col-75">
+        <%= form.text_field(:name, size: 50) %>
+      </div>
     </div>
-    <div class="col-75">
-      <%= form.text_field(:name, size: 50) %>
+    <div class="row">
+      <div class="col-25">
+        <%= label_tag(:heading, "Heading") %>
+      </div>
+      <div class="col-75">
+        <%= form.text_field(:heading, size: 50) %>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-25">
+        <%= label_tag(:website, "Website") %>
+      </div>
+      <div class="col-75">
+          <%= form.text_field(:website, size: 50) %>
+          <%= form.hidden_field(:short_url) %>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <%= submit_tag("Update", { :class=> "block" }) %>
+    </div>
+    <br/>
+  <% end %>
   </div>
-  <div class="row">
-    <div class="col-25">
-      <%= label_tag(:heading, "Heading") %>
-    </div>
-    <div class="col-75">
-      <%= form.text_field(:heading, size: 50) %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <%= label_tag(:website, "Website") %>
-    </div>
-    <div class="col-75">
-        <%= form.text_field(:website, size: 50) %>
-        <%= form.hidden_field(:short_url) %>
-    </div>
-  </div>
-  <br/>
-  <div class="row">
-    <%= submit_tag("Update", { :class=> "block" }) %>
-  </div>
-  <br/>
-<% end %>
 </div>
+<%= render "modal" %>

@@ -6,16 +6,18 @@
     <thead>
       <tr>
         <th class='text '>Name</th>
-        <th class='text '>Path</th>
+        <th class='text '>Connection</th>
       </tr>
     </thead>
     <tbody>
       <% @members.each do |member| %>
         <% if member.search_score != 0 %>
           <tr>
-            <td class='text ' data-title='Name'><%= link_to member.name, "/members/#{member.id}" %></td>
-            <td class='text ' data-title='Path'>
-            	<%= member.friend_connection %>
+            <td class='text ' data-title='Name'>
+              <%= link_to member.name, member.website, title: "Open page", :target => "_blank" %>
+            </td>
+            <td class='text ' data-title='Connection'>
+            	<%= member.friend_connection.html_safe %>
             </td>
           </tr>
         <% end %>

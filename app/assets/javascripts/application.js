@@ -32,16 +32,30 @@ Paloma.controller('Members', {
   index: function(){
     // Executes when Rails Members#index is executed.
     highlight('home');
+    $("a#connect").hide();
   },
-  new: function(){ highlight('member'); },
-  create: function(){ highlight('member'); },
-  show: function(){ highlight('member'); },
-  edit: function(){ highlight('member'); },
+  new: function(){ 
+    highlight('member');
+    $("a#connect").hide();
+  },
+  create: function(){ 
+    highlight('member');
+    $("a#connect").hide(); 
+  },
+  show: function(){ 
+    highlight('member'); 
+    $("a#connect").show();
+  },
+  edit: function(){ 
+    highlight('member'); 
+    $("a#connect").show();
+  },
 });
 
 Paloma.controller('Search', {
   index: function(){ highlight('search'); },
   show: function(){ highlight('search'); },
   create: function(){ highlight('search'); },
+  member: function(){ highlight('search'); }
 });
 

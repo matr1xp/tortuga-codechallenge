@@ -47,6 +47,19 @@ a:hover {
   color: green;
   background-color: #DAF7A6;
 }
+/* highlighted links */
+a.highlight1 {
+  color: green;
+  background-color: yellow;
+}
+a.highlight2 {
+  color: green;
+  background-color: #DAF7A6;
+}
+a.highlight3 {
+  color: green;
+  background-color: #DCEDD9;
+}
 div {
   &.field, &.actions {
     margin-bottom: 10px;

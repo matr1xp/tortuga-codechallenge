@@ -31,13 +31,13 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
+    @current = @member.id  
   end
 
   # POST /members
   def create
     @member = Member.new(member_params)
     @member.short_url = ShorturlAt.shorten(member_params[:website])
-
     respond_to do |format|
       if @member.save
         format.html { redirect_to @member, notice: 'Member was successfully created.' }
