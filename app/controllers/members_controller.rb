@@ -19,7 +19,6 @@ class MembersController < ApplicationController
     me = params[:id]
     @member = Member.find(me)
     @friends = @member.friends
-    @others = Member.where.not(id: me).collect{|o| [o.id, o.name, o.short_url]}  
     @current = @member.id  
   end
 

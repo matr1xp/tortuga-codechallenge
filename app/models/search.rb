@@ -1,5 +1,6 @@
 class Search < ApplicationRecord
 	belongs_to :member
-	validates :query, presence: true, length: { minimum: 4 }
-	validates :member_id, presence: true
+	validates_presence_of :query
+	validates :query, length: { minimum: 4 }, if: "query.present?"
+	validates_presence_of :member_id
 end

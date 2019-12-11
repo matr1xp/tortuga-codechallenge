@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Member, :type => :model do
-	subject { 
-		described_class.new(id: 1, name: "My Name", heading: "My short heading", website: "http://www.google.com")
-	}
 
 	describe "Validations" do
+		subject { 
+			described_class.new(id: 1, name: "My Name", heading: "My short heading", website: "http://www.google.com")
+		}
 		it "is valid with valid attributes" do
 			expect(subject).to be_valid
 		end
@@ -76,6 +76,12 @@ RSpec.describe Member, :type => :model do
 	end
 
 	describe "search!" do
+		it "is valid if all members are returned" do
+			member1 = create(:member, :member1)
+			member2 = create(:member, :member2)
+			search = Member.search("")
+			expect(search).to include(member1, member2)
+		end
 		it "is valid only if `Member 1` is returned" do
 			member1 = create(:member, :member1)
 			member2 = create(:member, :member2)
