@@ -18,6 +18,27 @@ bundle exec rails s
 
 Your app should now be running on [localhost:3000](http://localhost:3000/).
 
+### Testing
+
+To setup the unit tests run the following:
+
+```sh
+RAILS_ENV=test bundle exec rake db:migrate
+RAILS_ENV=test bundle exec rake db:seed
+```
+
+To run all tests:
+
+```sh
+bundle exec rspec -f d
+```
+
+or simply
+
+```
+rspec
+```
+
 ## Deploying to Heroku
 
 ```

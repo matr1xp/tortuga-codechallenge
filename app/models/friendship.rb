@@ -2,6 +2,8 @@ class Friendship < ApplicationRecord
   belongs_to :member
   belongs_to :friend, class_name: "Member"
 
+  validates_presence_of :member
+  
   after_create :create_inverse, unless: :has_inverse?
   after_destroy :destroy_inverses, if: :has_inverse?
 

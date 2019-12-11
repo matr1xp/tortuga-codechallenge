@@ -22,11 +22,11 @@ class Member < ApplicationRecord
       keywords = sanitize_search(term)
       return none if keywords.blank?
 
-      puts "#################################"
-      puts "# Running Search #{id} "
-      puts "# q: #{term}"
-      puts "# keywords: #{keywords}"
-      puts "#################################}"
+      # puts "#################################"
+      # puts "# Running Search #{id} "
+      # puts "# q: #{term}"
+      # puts "# keywords: #{keywords}"
+      # puts "#################################}"
       
       # where('heading ILIKE ?', "%#{term}%")
       # where('heading ilike any (array[?])', keywords.map {|s| "%#{s}%"})
@@ -36,9 +36,10 @@ class Member < ApplicationRecord
   end
 
   def self.sanitize_search(query)
+    @stop_words ||= Stopword.all.pluck(:word) if @stop_words.nil?
     # Break down term to phrases and strip of stop words  
     words = query.downcase.scan(/\w+/)
-    keywords = words.select { |word| !$stop_words.include?(word) }.join(' & ') # format for Postgres tsquery
+    keywords = words.select { |word| !@stop_words.include?(word) }.join(' & ') # format for Postgres tsquery
     sanitize keywords
   end
 end
