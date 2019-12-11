@@ -18,7 +18,7 @@ bundle exec rails s
 
 Your app should now be running on [localhost:3000](http://localhost:3000/).
 
-### Testing
+## Testing
 
 To setup the unit tests run the following:
 
@@ -38,6 +38,19 @@ or simply
 ```
 rspec
 ```
+
+## Code coverage
+
+To see code coverage of tests:
+
+Mac:
+
+```
+open coverage/index.html
+```
+Windows:
+
+* Open up "**coverage/index.html**" in a browser
 
 ## Deploying to Heroku
 
@@ -65,4 +78,4 @@ For more information about using Ruby on Heroku, see these Dev Center articles:
 
 - Mobile responsive design
 - Caching of search results
-- Unit testing
+- ~~Unit testing~~
