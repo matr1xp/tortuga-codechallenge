@@ -12,6 +12,7 @@ cd tortuga-codechallenge
 bundle
 bundle exec rake db:create
 bundle exec rake db:migrate
+bundle exec rake db:seed
 bundle exec rails s
 ```
 
@@ -23,6 +24,7 @@ Your app should now be running on [localhost:3000](http://localhost:3000/).
 heroku create
 git push heroku master
 heroku run rake db:migrate
+heroku run rake db:seed
 heroku open
 ```
 
