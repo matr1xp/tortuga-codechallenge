@@ -67,3 +67,5 @@ gem "factory_bot", "~> 5.1", :groups => [:development, :test]
 gem "database_cleaner", "~> 1.7", :group => :test
 
 gem "rails-controller-testing", "~> 1.0", :group => :test
+
+gem "simplecov", "~> 0.17.1", :group => :test
