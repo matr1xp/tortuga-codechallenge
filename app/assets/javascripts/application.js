@@ -57,7 +57,9 @@ Paloma.controller('Members', {
 });
 
 Paloma.controller('Friendships', {
-  select: function(){ highlight('connect'); }
+  select: function(){ 
+    highlight('connect');
+  }
 });
 
 Paloma.controller('Search', {

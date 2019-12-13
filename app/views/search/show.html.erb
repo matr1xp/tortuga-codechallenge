@@ -1,12 +1,11 @@
-<div id="main-window">
-	<div class="float-right">
-	  <div class="button row">
-	    <%= link_to image_tag("back.png", title: "Go back", size: "20x20", align: "top"), :back, :class => 'toolButton' %>
-	  </div>
+<div class="container popup">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal" onclick="hideModal(); highlight('member'); location.href=<%= "'/members/#{@member.id}'"%>">x</button>
 	</div>
-	<h1><%= "Search experts for #{@member.name}" %></h1>
-	<div class="container">
-		<%= render "search" %>
+	<div class="modal-body">
+	    <h1><%= "Search experts for #{@member.name}" %></h1>
+	    <div class="container">
+	    	<%= render "search" %>
+		</div>
 	</div>
 </div>
-<%= render "shared/modal" %>

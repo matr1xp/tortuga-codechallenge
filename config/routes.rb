@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   #get 'search', to: 'search#index'
-  get 'search/member/:id', to: 'search#member'
+  get 'search/member/:id', to: 'search#member', as: 'search_member'
   post 'search/:id', to: 'search#create'
   root to: 'members#index'
   get 'friendships/select/:id', to: 'friendships#select'

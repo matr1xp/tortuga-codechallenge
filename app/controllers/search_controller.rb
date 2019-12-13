@@ -11,35 +11,26 @@ class SearchController < ApplicationController
     @search = Search.new
   end
 
+  # GET /search/member/:id
   def member
-  	@search = Search.new
-  	@search.query = @member.heading
-  	@members = Member.search(@member.heading).exclude(params[:id]).includes(:friends)
+    @search = Search.order("updated_at DESC").where("member_id = ?", params[:id]).limit(1).first
+  	@search = Search.new(query: @member.heading, member_id: params[:id])  if @search.nil?
+  	@members = Member.search(@search.query, @search.id).exclude(params[:id]).includes(:friends)
+    format_search
   end
 
+  # GET /search/:id
   def show
+    puts "************************"
+    puts "* GET /search:id (show) "
+    puts "* search: #{@search.inspect}   *"
+    puts "* current: #{@current} *"
+    puts "************************"
     if @search
       me = @current = @search.member_id
       @member = Member.includes(:friends).find_by_id(me)
       @members = Member.search(@search.query, @search.id).exclude(me).includes(:friends)
-      @members.each do |member|
-        # To get common friends, do array intersection `&`
-        # but skip if they are already friends
-        if member.friends.select{|x| x.name == @member.name}.length == 0
-
-          common = member.friends & @member.friends
-          if !common.empty?
-            connection = []
-            common.each {|cf| connection.push "<a href='/members/#{@member.id}' class='highlight3'>#{@member.name}</a> &rarr; [<a href='/members/#{cf.id}' class='highlight1'>#{cf.name}</a>] &larr; <a href='/members/#{member.id}' class='highlight2'>#{member.name}</a>"}
-            member.friend_connection = connection.join("<br/>")
-          else
-            member.friend_connection = "No connection found!"
-          end
-        else
-          member.friend_connection = "Already friends"
-          member.search_score = 0
-        end
-      end
+      format_search
     end
   end
   
@@ -57,6 +48,7 @@ class SearchController < ApplicationController
 
   # PATCH/PUT /search/1
   def update
+    @search = Search.order("updated_at DESC").where("member_id = ?", params[:id]).limit(1).first if @search.nil?
     attributes = search_params.clone
     me = @search.member_id
     @member = Member.find_by_id(me)
@@ -67,6 +59,32 @@ class SearchController < ApplicationController
         format.html { render :show }
       end
     end
+  end
+
+  def format_search
+    results = []
+    @members.each do |member|
+      # To get common friends, do array intersection `&`
+      # but skip if they are already friends
+      if member.friends.select{|x| x.name == @member.name}.length == 0
+        common = member.friends & @member.friends
+        if !common.empty?
+          connection = []
+          common.each {|cf| connection.push "<a href='/members/#{@member.id}' class='highlight3'>#{@member.name}</a> &rarr; [<a href='/members/#{cf.id}' class='highlight1'>#{cf.name}</a>] &larr; <a href='/members/#{member.id}' class='highlight2'>#{member.name}</a>"}
+          member.friend_connection = connection.join("<br/>")
+          result = {:member => {id: member.id, name: member.name, connection: connection}}
+        else
+          member.friend_connection = "No connection found!"
+          result = {:member => {id: member.id, name: member.name, connection: "No connection found!"}}
+        end
+      else
+        member.friend_connection = "Already connected!"
+        member.search_score = 1
+        result = {:member => {id: member.id, name: member.name, connection: "Already connected!"}}
+      end
+      results.push(result)
+    end
+    @search.update_attributes(:results => results.to_json)
   end
 
   private

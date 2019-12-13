@@ -4,10 +4,10 @@
     <%= link_to image_tag("home.png", title: "Home", size: "20x20", align: "top"),  '/' , :class => 'toolButton' %>
     </div>
     <div class="button row">
-    <%= link_to image_tag("add-friend.png", title: "Add Friends", size: "20x20", align: "top"), "/friendships/select/#{@member.id}", :remote => true, :class => 'toolButton', :onclick => "showModal();" %>
+    <%= link_to image_tag("add-friend.png", title: "Add Friends", size: "20x20", align: "top"), "/friendships/select/#{@member.id}", :remote => true, :class => 'toolButton', :onclick => "showModal(); highlight('connect');" %>
     </div>
     <div class="button row">
-      <%= link_to image_tag("show.png", title: "Find similar", size: "20x20", align: "top"), "/search/member/#{@member.id}", :remote => true, :class => 'toolButton', :onclick => "showModal();" %>
+      <%= link_to image_tag("show.png", title: "Find similar", size: "20x20", align: "top"), "/search/member/#{@member.id}", :remote => true, :class => 'toolButton', :onclick => "showModal(); highlight('search');" %>
     </div>
     <div class="button row">
     <%= link_to image_tag("delete.png", title: "Delete", size: "20x20", align: "top"),  '' , method: :delete, data: { confirm: "DELETE Member:\n#{@member.name}\nAre you sure?" }, :class => 'toolButton' %>
@@ -51,5 +51,4 @@
     <%= link_to "Edit", edit_member_path(@member), :class => 'block' %>
   </div>
 </div>
-<%= render "shared/modal" %>
 

@@ -17,7 +17,7 @@
               <%= link_to member.name, member.website, title: "Open page", :target => "_blank" %>
             </td>
             <td class='text ' data-title='Connection'>
-            	<%= member.friend_connection.html_safe %>
+            	<%= member.friend_connection.html_safe if member.friend_connection %>
             </td>
           </tr>
         <% end %>
