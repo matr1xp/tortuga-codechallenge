@@ -102,12 +102,12 @@ RSpec.describe Member, :type => :model do
 		it "is valid if `member & 1` is returned" do
 			member1 = create(:member, :member1)
 			sanitize_search = Member.sanitize_search("<!-- Member 1 />")
-			expect(sanitize_search).to eql "'member & 1'"
+			expect(sanitize_search).to eql "member & 1"
 		end
 		it "is valid if stop_word `the` is not included" do
 			member1 = create(:member, :member1)
 			sanitize_search = Member.sanitize_search("<!-- The Member />")
-			expect(sanitize_search).to eql "'member'"
+			expect(sanitize_search).to eql "member"
 		end
 	end
 

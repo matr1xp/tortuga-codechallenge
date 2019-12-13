@@ -21,11 +21,6 @@ class SearchController < ApplicationController
 
   # GET /search/:id
   def show
-    puts "************************"
-    puts "* GET /search:id (show) "
-    puts "* search: #{@search.inspect}   *"
-    puts "* current: #{@current} *"
-    puts "************************"
     if @search
       me = @current = @search.member_id
       @member = Member.includes(:friends).find_by_id(me)
